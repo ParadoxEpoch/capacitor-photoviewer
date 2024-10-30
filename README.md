@@ -49,6 +49,7 @@ On iOS plugin, the creation of a movie from the pictures stored in the <strong>A
 | Maintainer | GitHub                                    | Social                                        |
 | ---------- | ----------------------------------------- | --------------------------------------------- |
 | Robin Genz | [robingenz](https://github.com/robingenz) | [@robin_genz](https://twitter.com/robin_genz) |
+| Tristan Gauci | [ParadoxEpoch](https://github.com/paradoxepoch) | [@ParadoxEpoch](https://twitter.com/paradoxepoch) |
 
 ## Browser Support
 
@@ -83,6 +84,7 @@ export default config;
 
 
 ```
+
 ### iOS
 
 - in Xcode, open `Info.plist` and add a new Information Property like `Privacy - Photo Library Usage Description` and set a value to `We need to write photos`. This is required to have the `Share`of images and the `create Movie` working.
@@ -113,24 +115,29 @@ buildscript {
 
 - open the `build.gradle (Module: android.app)` and do the following
 
-    - after `apply plugin: 'com.android.application'` add
+  - after `apply plugin: 'com.android.application'` add
+
         ```
         apply plugin: 'kotlin-android'
         apply plugin: 'kotlin-kapt'
         ```
 
-    - in the `android` block add
+  - in the `android` block add
+
         ```
         buildFeatures {
             dataBinding = true
         }
         ```
 
-    - in the `repositories` block add
+  - in the `repositories` block add
+
         ```
         maven { url 'https://jitpack.io' }
         ```
-    - in the `dependencies` block add
+
+  - in the `dependencies` block add
+
         ```
         implementation "androidx.core:core-ktx:1.10.0"
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -146,7 +153,6 @@ It is mandatory to install it
 ```
 npm install --save-dev jeep-photoviewer@latest
 ```
-
 
 ### Build your App
 
@@ -169,7 +175,6 @@ npm run serve          // Web
 | show                        | ✅       | ✅    | ❌        | ✅    |
 | saveImageFromHttpToInternal | ❌       | ✅    | ❌        | ❌    |
 | getInternalImagePaths       | ❌       | ✅    | ❌        | ❌    |
-
 
 ## Documentation
 
@@ -195,21 +200,19 @@ npm run serve          // Web
 
 - [In your Ionic/Angular App](https://github.com/capacitor-community/photoviewer/blob/master/docs/Ionic-Angular-Usage.md)
 
-
-
 ### iOS and Android
 
 - In `Gallery` mode (Image Array with more than one Image):
-    - make a `tap` will select the image and go fullscreen
-    - In Fulscreen
-        - `tap` will hide the share and exit buttons and open the window for other gestures.
-        - `double tap` to zoom in and out
-        - `pinch` with your two fingers
-        - `tap` will show the share and exit buttons and leave the window for other gestures.
-        - `double tap` will hide the buttons and zoom in straightforward (iOS only)
+  - make a `tap` will select the image and go fullscreen
+  - In Fulscreen
+    - `tap` will hide the share and exit buttons and open the window for other gestures.
+    - `double tap` to zoom in and out
+    - `pinch` with your two fingers
+    - `tap` will show the share and exit buttons and leave the window for other gestures.
+    - `double tap` will hide the buttons and zoom in straightforward (iOS only)
 - In `One Image` mode (Image Array with one Image only):
-    - `pinch-zoom` and `pan` with your two fingers
-    - `double-tap` to zoom directly to the maximum zoom
+  - `pinch-zoom` and `pan` with your two fingers
+  - `double-tap` to zoom directly to the maximum zoom
 - You can pass customHeaders in the options object to let the plugin pass those headers to the http request for the image. For example:
 
 ```ts
@@ -234,12 +237,11 @@ PhotoViewer.show({
 })
 ```
 
-
 ## Dependencies
 
-The Android code is using `MikeOrtiz/TouchImageView` allowing for the zooming in picture (https://github.com/MikeOrtiz/TouchImageView)
+The Android code is using `MikeOrtiz/TouchImageView` allowing for the zooming in picture (<https://github.com/MikeOrtiz/TouchImageView>)
 
-The iOS code is using `SDWebImage` for http async image downloader (https://github.com/SDWebImage/SDWebImage) and `ISVImageScrollView` for the pinch-zoom and pan in picture (https://github.com/yuriiik/ISVImageScrollView)
+The iOS code is using `SDWebImage` for http async image downloader (<https://github.com/SDWebImage/SDWebImage>) and `ISVImageScrollView` for the pinch-zoom and pan in picture (<https://github.com/yuriiik/ISVImageScrollView>)
 
 ## Contributors ✨
 
