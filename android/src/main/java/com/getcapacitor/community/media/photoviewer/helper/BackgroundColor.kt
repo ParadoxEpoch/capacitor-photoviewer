@@ -11,6 +11,7 @@ class BackgroundColor {
             "lightgrey" -> backColor = R.color.lightgrey
             "darkgrey" -> backColor = R.color.darkgrey
             "dimgrey" -> backColor = R.color.dimgrey
+            "blur" -> backColor = R.color.transparent
 
             else -> backColor = R.color.black
         }
