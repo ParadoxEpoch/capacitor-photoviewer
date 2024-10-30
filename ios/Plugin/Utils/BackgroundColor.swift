@@ -2,7 +2,8 @@
 //  BackgroundColor.swift
 //  CapacitorCommunityPhotoviewer
 //
-//  Created by  Quéau Jean Pierre on 04/02/2022.
+//  Created by Quéau Jean Pierre on 04/02/2022.
+//	Additions by Tristan Gauci (ParadoxEpoch) on 30/10/2024.
 //
 
 import UIKit
@@ -22,6 +23,8 @@ class BackgroundColor {
             retColor = UIColor(red: 105, green: 105, blue: 105, alpha: 1)
         case "grey":
             retColor = UIColor(red: 128, green: 128, blue: 128, alpha: 1)
+        case "blur":
+            retColor = UIColor.clear
         default:
             retColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         }
