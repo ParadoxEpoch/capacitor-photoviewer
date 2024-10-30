@@ -82,6 +82,24 @@ class OneImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    private let mScreenshotImage: UIImage? = {
+        // Use scenes and windows for iOS 13 and later
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            
+            // Render the window's layer into an image
+            UIGraphicsBeginImageContextWithOptions(window.bounds.size, false, UIScreen.main.scale)
+            defer { UIGraphicsEndImageContext() }
+            
+            if let context = UIGraphicsGetCurrentContext() {
+                window.layer.render(in: context)
+                let image = UIGraphicsGetImageFromCurrentImageContext()
+                return image
+            }
+        }
+        
+        return nil
+    }()
     private let mBlurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -237,10 +255,10 @@ class OneImageViewController: UIViewController, UIScrollViewDelegate {
         mBackdropView.backgroundColor = _backColor.setBackColor(color: _backgroundColor)
         
         // Capture a screenshot for the view background
-        if let capturedImage = captureScreenshot() {
+        if mScreenshotImage != nil {
             // Create an UIImageView with the captured image
             let imageView = UIImageView(frame: view.bounds)
-            imageView.image = capturedImage
+            imageView.image = mScreenshotImage
             imageView.contentMode = .scaleAspectFill
             
             // Add the image view as a subview directly to the view controller's view
@@ -248,25 +266,6 @@ class OneImageViewController: UIViewController, UIScrollViewDelegate {
         }
         
         addSubviewsToParentView(size: CGSize(width: view.frame.width, height: view.frame.height))
-    }
-    
-    func captureScreenshot() -> UIImage? {
-        // Use scenes and windows for iOS 13 and later
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
-            
-            // Render the window's layer into an image
-            UIGraphicsBeginImageContextWithOptions(window.bounds.size, false, UIScreen.main.scale)
-            defer { UIGraphicsEndImageContext() }
-            
-            if let context = UIGraphicsGetCurrentContext() {
-                window.layer.render(in: context)
-                let image = UIGraphicsGetImageFromCurrentImageContext()
-                return image
-            }
-        }
-        
-        return nil
     }
     
     @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
